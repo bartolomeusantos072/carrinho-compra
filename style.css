@@ -49,7 +49,9 @@ body {
     border: 1px solid #ccc;
     text-align: center;
 }
-
+.product img{
+    max-width: 200px;
+}
 button {
     padding: 10px 15px;
     cursor: pointer;
