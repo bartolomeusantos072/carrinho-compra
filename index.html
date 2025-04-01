@@ -35,8 +35,57 @@
         <div id="cart-total">
             <p>Total: R$ <span id="total-price">0,00</span></p>
         </div>
+        <button id="fazer-pedido">Fazer Pedido</button>
         <button id="clear-cart">Limpar Carrinho</button>
     </div>
+    <div id="pedido-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Finalizar Pedido</h2>
+    
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" placeholder="Digite seu nome">
+            
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" placeholder="Digite seu endereço">
+            
+            <label for="pagamento">Forma de Pagamento:</label>
+            <select id="pagamento">
+                <option value="Pix">Pix</option>
+                <option value="Cartão">Cartão</option>
+                <option value="Dinheiro">Dinheiro</option>
+            </select>
+    
+            <div class="modal-buttons">
+                <button id="confirmar-pedido">✅ Confirmar Pedido</button>
+                <button id="cancelar-pedido">❌ Cancelar Pedido</button>
+            </div>
+        </div>
+    </div>
+    <div id="pedido-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Finalizar Pedido</h2>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" placeholder="Digite seu nome">
+    
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" placeholder="Digite seu endereço">
+    
+            <label for="pagamento">Forma de Pagamento:</label>
+            <select id="pagamento">
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Cartão">Cartão</option>
+                <option value="Pix">Pix</option>
+            </select>
+    
+            <div class="modal-buttons">
+                <button id="confirmar-pedido">Confirmar Pedido</button>
+                <button id="cancelar-pedido">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    
     <footer>
         <div class="footer-container">
             <div class="footer-section">
