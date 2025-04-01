@@ -99,7 +99,7 @@ header {
  
  h1{
     font-size: 10em; 
-    color: rgb(9, 102, 46);    
+    color: rgb(255, 255, 255);    
  }
 
  footer {
@@ -209,4 +209,73 @@ input {
     margin: 8px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+/* 📌 Ajustes para telas menores que 768px (celulares) */
+@media screen and (max-width: 768px) {
+    .store, .cart {
+        width: 90%; /* Ocupa quase toda a largura para melhor visualização */
+        margin: 10px auto;
+        padding: 15px;
+    }
+
+    #products-list {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas no celular */
+        gap: 10px; /* Reduz o espaçamento */
+    }
+
+    .product img {
+        max-width: 100px; /* Reduz o tamanho da imagem */
+        max-height: 100px;
+    }
+
+    header {
+        height: 120px; /* Reduz o tamanho do cabeçalho */
+    }
+
+    header img {
+        height: 80px;
+        width: 80px;
+    }
+
+    h1 {
+        font-size: 2em; /* Reduz o tamanho do título */
+        text-align: center;
+    }
+
+    .footer-container {
+        flex-direction: column; /* Deixa o footer em coluna para melhor leitura */
+        align-items: center;
+        text-align: center;
+    }
+
+    .modal-content {
+        width: 90%; /* Aumenta o tamanho do modal no celular */
+    }
+
+    .botao-flutuante {
+        padding: 10px 15px; /* Reduz o tamanho do botão flutuante */
+        font-size: 14px;
+    }
+}
+
+/* 📌 Ajustes para telas menores que 480px (smartphones pequenos) */
+@media screen and (max-width: 480px) {
+    #products-list {
+        grid-template-columns: repeat(1, 1fr); /* Apenas 1 coluna para melhor exibição */
+    }
+
+    .product img {
+        max-width: 80px;
+        max-height: 80px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .botao-flutuante {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
 }

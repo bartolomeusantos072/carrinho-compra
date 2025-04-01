@@ -1,5 +1,6 @@
 // Lista de produtos disponíveis para compra
-import products from './produtcs.js'
+import products from './produtcs.js';
+import { estabelecimento, cores } from './dados.js';
 // Função para salvar o carrinho no cookie
 function setCookie(name, value, days) {
   const date = new Date();
