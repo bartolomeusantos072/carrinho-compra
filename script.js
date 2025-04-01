@@ -143,7 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Evento de limpar o carrinho
   document.getElementById("clear-cart").addEventListener("click", clearCart);
 });
-
 document.addEventListener("DOMContentLoaded", function () {
   const modal = document.getElementById("pedido-modal");
   const btnAbrir = document.getElementById("fazer-pedido");
@@ -174,67 +173,70 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Detectar se está no celular ou PC
     function isMobile() {
-      return /Android|iPhone|iPad|iPod|Windows Phone/i.test(
-        navigator.userAgent
-      );
+      return /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
     }
+
     // Capturar os dados ao confirmar o pedido e enviar via WhatsApp
     function getWhatsAppLink(numeroWhatsApp, mensagem) {
       const encodedMessage = encodeURIComponent(mensagem);
-  
+
       if (isMobile()) {
-          // Para usuários de dispositivos móveis, pode-se usar 'api.whatsapp.com'
-          return `https://api.whatsapp.com/send/?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensagem)}&type=phone_number&app_absent=0`;
+        return `https://api.whatsapp.com/send/?phone=${numeroWhatsApp}&text=${encodedMessage}&type=phone_number&app_absent=0`;
       } else {
-          // Para usuários de desktop, usar o WhatsApp Web
-          return `https://web.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodedMessage}`;
+        return `https://web.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodedMessage}`;
       }
-  }
-  
-  btnConfirmar.addEventListener("click", function () {
+    }
+
+    btnConfirmar.addEventListener("click", function () {
       let nome = document.getElementById("nome").value;
       let endereco = document.getElementById("endereco").value;
       let pagamento = document.getElementById("pagamento").value;
-      let total = document.getElementById("total-price").textContent;
-  
+      let total = document.getElementById("total-price").textContent.trim();
+
       if (!nome || !endereco) {
-          alert("Por favor, preencha todos os campos!");
-          return;
+        alert("Por favor, preencha todos os campos!");
+        return;
       }
-  
+
       // Capturar os itens do carrinho
       let itens = [];
       document.querySelectorAll("#cart-items li").forEach((item) => {
-          const [name, unid, quantity, price] = item.textContent.split(" - ");
-          
-          const itemQuantity = parseInt(quantity); // Corrigido para número inteiro
-          const itemPrice = parseFloat(price.replace("R$", "").trim()); 
-          
-          const itemTotal = (itemPrice * itemQuantity).toFixed(2); // Corrigido para 2 casas decimais
-  
-          itens.push(`${itemQuantity} ${unid} ${name} - R$ ${itemTotal}`);
+        const itemText = item.textContent.split(" - ");
+        
+        if (itemText.length !== 4) {
+          console.error("Erro ao processar item do carrinho:", item.textContent);
+          return;
+        }
+
+        const [name, unid, quantity, price] = itemText;
+
+        const itemQuantity = parseInt(quantity) || 0; // Evitar NaN
+        const itemPrice = parseFloat(price.replace("R$", "").trim()) || 0;
+
+        const itemTotal = (itemPrice * itemQuantity).toFixed(2);
+
+        itens.push(`${itemQuantity} ${unid} ${name} - R$ ${itemTotal}`);
       });
-  
+
       // Montar a mensagem para o WhatsApp
-      let mensagem = `📦 *Pedido Realizado!*\n\n👤 *Nome:* ${nome}\n🏠 *Endereço:* ${endereco}\n💳 *Forma de Pagamento:* ${pagamento}\n\n🛒 *Itens:* \n- ${itens.join(
-          "\n- "
-      )}\n\n💰 *Total:* R$ ${total}\n\nObrigado pela compra!`;
-  
+      let mensagem = `📦 *Pedido Realizado!*\n\n👤 *Nome:* ${nome}\n🏠 *Endereço:* ${endereco}\n💳 *Forma de Pagamento:* ${pagamento}\n\n🛒 *Itens:* \n- ${itens.join("\n- ")}\n\n💰 *Total:* R$ ${total}\n\nObrigado pela compra!`;
+
       let numeroWhatsApp = "5532999253244"; // Seu número de WhatsApp com DDD
-  
+
       // Gerar link do WhatsApp
       let linkWhatsApp = getWhatsAppLink(numeroWhatsApp, mensagem);
-  
+
       // Caso o primeiro link falhe, usar api.whatsapp.com como fallback
-      let fallbackLink = `https://wa.me/${numeroWhatsApp}?text=${encodedMessage}`;
-  
+      let fallbackLink = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+
       // Tentar abrir o link principal, se falhar, abrir o fallback
       window.open(linkWhatsApp, "_blank") || window.open(fallbackLink, "_blank");
-  
+
       // Fechar o modal após confirmar
       fecharModal();
-  });
+    });
   } else {
     console.error("Erro: Um ou mais elementos do modal não foram encontrados.");
   }
 });
+
