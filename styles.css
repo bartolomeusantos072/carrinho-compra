@@ -213,6 +213,9 @@ input {
 
 /* 📌 Ajustes para telas menores que 768px (celulares) */
 @media screen and (max-width: 768px) {
+    h1{
+        font-size: 8em;
+    }
     .store, .cart {
         width: 90%; /* Ocupa quase toda a largura para melhor visualização */
         margin: 10px auto;
@@ -261,6 +264,9 @@ input {
 
 /* 📌 Ajustes para telas menores que 480px (smartphones pequenos) */
 @media screen and (max-width: 480px) {
+    h1{
+        font-size: 8em;
+    }
     #products-list {
         grid-template-columns: repeat(1, 1fr); /* Apenas 1 coluna para melhor exibição */
     }
