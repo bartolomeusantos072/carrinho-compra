@@ -183,8 +183,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const encodedMessage = encodeURIComponent(mensagem);
   
       if (isMobile()) {
-          // Para usuários de dispositivos móveis, pode-se usar 'wa.me' ou 'api.whatsapp.com'
-          return `https://wa.me/${numeroWhatsApp}?text=${encodedMessage}`;
+          // Para usuários de dispositivos móveis, pode-se usar 'api.whatsapp.com'
+          return `https://api.whatsapp.com/send/?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensagem)}&type=phone_number&app_absent=0`;
       } else {
           // Para usuários de desktop, usar o WhatsApp Web
           return `https://web.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodedMessage}`;
@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let linkWhatsApp = getWhatsAppLink(numeroWhatsApp, mensagem);
   
       // Caso o primeiro link falhe, usar api.whatsapp.com como fallback
-      let fallbackLink = `https://api.whatsapp.com/send/?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensagem)}&type=phone_number&app_absent=0`;
+      let fallbackLink = `https://wa.me/${numeroWhatsApp}?text=${encodedMessage}`;
   
       // Tentar abrir o link principal, se falhar, abrir o fallback
       window.open(linkWhatsApp, "_blank") || window.open(fallbackLink, "_blank");
