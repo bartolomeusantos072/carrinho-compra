@@ -36,8 +36,7 @@ function renderProducts() {
     productDiv.classList.add("product");
     productDiv.innerHTML = `
             <img src=${product.img} alt=${product.name}>
-            <h3>${product.name}</h3>
-            <h2>${product.unid}</h2>
+            <h3>${product.name} - ${product.unid}</h3>
             <p>R$ ${product.price.toFixed(2)}</p>
             <button class="add-to-cart" data-id="${
               product.id

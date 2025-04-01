@@ -51,6 +51,7 @@ body {
 }
 .product img{
     max-width: 200px;
+    max-height: 200px;
 }
 button {
     padding: 10px 15px;
