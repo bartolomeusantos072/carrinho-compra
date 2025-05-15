@@ -272,7 +272,7 @@ input {
     }
 
     .product img {
-        max-width: 80px;
+        max-width: 50%;
         max-height: 80px;
     }
 
